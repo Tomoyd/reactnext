@@ -34,8 +34,10 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"serve": "babel-node server/index",
+		"serve18": "babel-node react18ssr/server/index",
 		"build:client": "webpack --config webpack.client.js",
-		"build:server": "webpack --config webpack.server.js"
+		"build:server": "webpack --config webpack.server.js",
+		"build:ssr18": "webpack --config ./react18ssr/webpack.client.js"
 	},
 	"keywords": [],
 	"author": "",

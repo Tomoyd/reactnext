@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import Router from '../client/Router';
 import getStore from '../store';
-import { homeListAction } from '../store/actions/home';
 
 // 脱水, 只有干的html 没有事件无法交互
 export const render = (req, actionData) => {
