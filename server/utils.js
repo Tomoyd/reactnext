@@ -1,14 +1,22 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import Router from '../client/Router';
+import getStore from '../store';
+import { homeListAction } from '../store/actions/home';
 
-export const render = (req) => {
-	console.log('req', req.baseUrl);
+// 脱水, 只有干的html 没有事件无法交互
+export const render = (req, actionData) => {
+	const store = getStore();
+	store.dispatch(actionData);
+
 	const content = renderToString(
-		<StaticRouter location={req.baseUrl}>
-			<Router></Router>
-		</StaticRouter>,
+		<Provider store={store}>
+			<StaticRouter location={req.baseUrl}>
+				<Router></Router>
+			</StaticRouter>
+		</Provider>,
 	);
 
 	return `
@@ -16,6 +24,9 @@ export const render = (req) => {
         <body>
             <div id="root"> 
                 ${content}
+                <script>
+                window.$initState = ${JSON.stringify(store.getState())}; 
+                </script>
                 <script src="/main.js"></script>
             </div>
         </body>

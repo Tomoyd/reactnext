@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link, Routes } from 'react-router-dom';
 import Home from './Home';
+
 import Login from './Login';
 
 const Router = () => {
@@ -13,11 +14,13 @@ const Router = () => {
 				<Link to='/login'>login</Link>
 			</div>
 			<Routes>
-				<Route path='/' exact element={<div>1114141414</div>}></Route>
+				<Route path='/' exact element={<Home></Home>}></Route>
 				<Route path='/login' exact element={<Login></Login>}></Route>
 			</Routes>
 		</div>
 	);
 };
+
+
 
 export default Router;

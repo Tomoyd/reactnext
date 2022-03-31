@@ -1,17 +1,43 @@
-const React = require('react');
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getHomeList } from '../store/actions/home';
 
-const Home = () => {
-	return (
-		<div>
-			<div
-				onClick={() => {
-					alert('1111');
-				}}
-			>
-				Home
+class Home extends React.Component {
+	// useEffect(() => {
+	// 	console.log('home', home);
+	// 	getHomeList();
+	// }, []);
+
+	componentDidMount() {
+		console.log('first', this.props.home);
+		console.log('first', getHomeList);
+		// this.props.getHomeList();
+	}
+
+	render() {
+		return (
+			<div>
+				<div
+					onClick={() => {
+						this.props.getHomeList();
+					}}
+				>
+					<div>
+						{this.props.home.homeList.map((item) => {
+							return <div key={item}>{item}</div>;
+						})}
+					</div>
+					Home
+				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
-module.exports = Home;
+const mapStateToProps = (state) => ({
+	home: state.home,
+});
+
+export default connect(mapStateToProps, {
+	getHomeList: getHomeList,
+})(Home);
